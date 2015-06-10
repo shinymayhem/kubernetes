@@ -1,4 +1,3 @@
-
 apiVersion: v1beta3
 kind: Service
 metadata:
@@ -6,6 +5,7 @@ metadata:
   namespace: default
   labels:
     k8s-app: kibana-logging
+    role: logging
     kubernetes.io/cluster-service: "true"
     kubernetes.io/name: "Kibana"
 spec:
