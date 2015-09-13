@@ -5,6 +5,7 @@ metadata:
   namespace: kube-system
   labels:
     k8s-app: kibana-logging
+    role: logging
     kubernetes.io/cluster-service: "true"
     kubernetes.io/name: "Kibana"
 spec:
