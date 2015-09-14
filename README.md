@@ -1,3 +1,20 @@
+##Shinymayhem Customized kubernetes
+This set of customizations mainly applies to the addition of nanoseconds to fluentd, and the upgrade of kibana. These are base services deployed out-of-band for a kubernetes cluster.
+
+
+* download and extract a kubernetes release (1.0.4) and cd to it
+* modify cluster/gce/config-default.sh as needed, potentially making the same changes made in this repo
+** e.g. small master, 2 minions, log to elasticsearch instead of gcp, kube prefix
+* untar server/kubernetes-salt.tar.gz
+* modify kubernetes/saltbase/salt/fluentd-es/fluentd-es.yaml to use custom image of fluentd (e.g. shinymayhem/fluentd-es:1.11). be sure to modify the rest of the yaml file to match corresponding file in the main kubernetes repo (i.e. in cluster/addons)
+* modify kibana and elasticsearch stuff in the salt directory if needed
+* `tar -zcf kubernetes-salt-custom.tar.gz ./kubernetes` to tar the folder back up
+* get the sha1 hash of the tar and copy it to kubernetes-salt-custom.tar.gz.sha1 (on mac, use `shasum`)
+* modify cluster/gce/util.sh to use new salt tar
+* ensure custom fluentd image has filter and match tags to add nanosecond time to logs [see link](http://stackoverflow.com/a/27928598)
+* run cluster/kube-up.sh
+* go to kibana and add the default index, `logstash-*`, and set `@timestamp` as the time-field. then, in the discover tab, filter by the default namespace and add the formatted-log and time-nano fields. this will allow all docker logs from user-created containers to show up and be sorted in the correct order
+
 # Kubernetes
 
 [![GoDoc](https://godoc.org/k8s.io/kubernetes?status.png)](https://godoc.org/k8s.io/kubernetes) [![Travis](https://travis-ci.org/kubernetes/kubernetes.svg?branch=master)](https://travis-ci.org/kubernetes/kubernetes) [![Coverage Status](https://coveralls.io/repos/kubernetes/kubernetes/badge.svg)](https://coveralls.io/r/kubernetes/kubernetes)
