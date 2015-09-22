@@ -6,7 +6,7 @@ This set of customizations mainly applies to the addition of nanoseconds to flue
 * modify cluster/gce/config-default.sh as needed, potentially making the same changes made in this repo
 ** e.g. small master, 2 minions, log to elasticsearch instead of gcp, kube prefix
 * untar server/kubernetes-salt.tar.gz
-* modify kubernetes/saltbase/salt/fluentd-es/fluentd-es.yaml to use custom image of fluentd (e.g. shinymayhem/fluentd-es:1.11). be sure to modify the rest of the yaml file to match corresponding file in the main kubernetes repo (i.e. in cluster/addons)
+* modify kubernetes/saltbase/salt/fluentd-es/fluentd-es.yaml to use custom image of fluentd (e.g. shinymayhem/fluentd-es:1.11). be sure to modify the rest of the yaml file to match corresponding file in the main kubernetes repo (i.e. in ~~cluster/addons or~~ saltbase/salt/fluentd-es/fluentd-es.yaml)
 * modify kibana and elasticsearch stuff in the salt directory if needed
 * `tar -zcf kubernetes-salt-custom.tar.gz ./kubernetes` to tar the folder back up
 * get the sha1 hash of the tar and copy it to kubernetes-salt-custom.tar.gz.sha1 (on mac, use `shasum`)
