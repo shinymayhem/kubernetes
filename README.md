@@ -13,7 +13,7 @@ This set of customizations mainly applies to the addition of nanoseconds to flue
 * `tar -zcf kubernetes-salt-custom.tar.gz ./kubernetes` to tar the folder back up
 * get the sha1 hash of the tar and copy it to kubernetes-salt-custom.tar.gz.sha1 `sha1sum kubernetes-salt-custom.tar.gz | cut -d' ' -f1 > kubernetes-salt-custom.tar.gz.sha1` (on mac, use `shasum`)
 * modify cluster/gce/util.sh to use new salt tar
-* ensure custom fluentd image has filter and match tags to add nanosecond time to logs [see link](http://stackoverflow.com/a/27928598)
+* ensure custom fluentd image has filter and match tags to add nanosecond time to logs by using shinymayhem:fluentd-es:1.11 or manually [see link](http://stackoverflow.com/a/27928598)
 * run cluster/kube-up.sh
 * go to kibana and add the default index, `logstash-*`, and set `@timestamp` as the time-field. then, in the discover tab, filter by the default namespace and add the formatted-log and time-nano fields. this will allow all docker logs from user-created containers to show up and be sorted in the correct order
 
