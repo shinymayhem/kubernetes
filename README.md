@@ -11,7 +11,7 @@ This set of customizations mainly applies to the addition of nanoseconds to flue
   * 1 replica of elasticsearch
   * shinymayhem/kibana:1.3 image for upgraded kibana
 * `tar -zcf kubernetes-salt-custom.tar.gz ./kubernetes` to tar the folder back up
-* get the sha1 hash of the tar and copy it to kubernetes-salt-custom.tar.gz.sha1 (on mac, use `shasum`)
+* get the sha1 hash of the tar and copy it to kubernetes-salt-custom.tar.gz.sha1 `sha1sum kubernetes-salt-custom.tar.gz | cut -d' ' -f1 > kubernetes-salt-custom.tar.gz.sha1` (on mac, use `shasum`)
 * modify cluster/gce/util.sh to use new salt tar
 * ensure custom fluentd image has filter and match tags to add nanosecond time to logs [see link](http://stackoverflow.com/a/27928598)
 * run cluster/kube-up.sh
